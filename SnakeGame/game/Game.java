@@ -8,7 +8,7 @@ public class Game extends JFrame {
 		add(new Board());
 		this.setResizable(true);
 		this.pack();
-		
+		this.setVisible(true);
 		this.setTitle("Snake Game");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
