@@ -123,7 +123,27 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 	}
 	
+	/**
+	 * check if head collides with body or game borders
+	 */
 	public void checkForCollision() {
+		for(int i = bodyParts; i > 0; i--) { //checking each body part
+			if((x[0] == x[i]) && (y[0] == y[i])) { //if head coords = body coords
+				running = false; //stop game
+			}
+		}
+		
+		if(x[0] < 0) //if head touches left border
+			running = false;
+		if(x[0] > SCREEN_WIDTH) //if head touches right border
+			running = false;
+		if(y[0] < 0) //if head touches bottom border
+			running = false;
+		if(y[0] > SCREEN_HEIGHT) //if head touches top border
+			running = false;
+		
+		if(!running)
+			timer.stop(); //stop timer if there's a collision
 		
 	}
 
@@ -134,12 +154,41 @@ public class GamePanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(running) { //if the game is running
+			move(); //move the snake
+			checkApple(); //did we run into the apple?
+			checkForCollision(); //did we run into ourselves or the wall?
+		}
+		repaint();
 		
 	}
 	
+	/**
+	 * class for what keys are being pressed to control the snake's movements
+	 * @author Reskr
+	 *
+	 */
 	public class keyAdapter extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
+			switch(e.getKeyCode()) {
+			case KeyEvent.VK_LEFT:
+				if(direction != 'R') //prevents player from making 180 degree turns
+					direction = 'L'; //go left
+				break;
+			case KeyEvent.VK_RIGHT:
+				if(direction != 'L')
+					direction = 'R';
+				break;
+			case KeyEvent.VK_UP:
+				if(direction != 'D')
+					direction = 'U';
+				break;
+			case KeyEvent.VK_DOWN:
+				if(direction != 'U')
+					direction = 'D';
+				break;
+			}
 			
 		}
 	}
