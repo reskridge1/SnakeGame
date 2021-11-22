@@ -9,8 +9,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Board extends JPanel implements ActionListener {
-	private final static int BOARDWIDTH = 1000;
-	private final static int BOARDHEIGHT = 980;
+	private final static int BOARDWIDTH = 500;
+	private final static int BOARDHEIGHT = 500;
 
 	private final static int PIXELSIZE = 25; // pixel size for apple and snake joints
 
@@ -58,7 +58,6 @@ public class Board extends JPanel implements ActionListener {
 
 	private void initGame() {
 		snake.setNumJoints(3); // set the initial snake size
-
 		for (int i = 0; i < snake.getJoints(); i++) {
 			snake.setSnakeX(BOARDWIDTH / 2);
 			snake.setSnakeY(BOARDHEIGHT / 2);

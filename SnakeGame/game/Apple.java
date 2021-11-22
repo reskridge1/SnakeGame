@@ -5,8 +5,8 @@ public class Apple {
 	private int appleX; // Xpos for apple
 	private int appleY; // Ypos for apple
 
-	private final int RANDOMPOSITION = (int) Math.random() * 100;
-
+	private final int RANDOMPOSITION = 40;
+	
 	public void createApple() { // randomizes apple position
 		int location = (int) (Math.random() * RANDOMPOSITION);
 
