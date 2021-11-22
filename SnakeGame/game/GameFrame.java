@@ -4,8 +4,7 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
 	public GameFrame() {
-		GamePanel gp = new GamePanel();
-		this.add(gp);
+		this.add(new GamePanel());
 		this.setTitle("Snake Game");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false); //doesn't allow frame to be resized
