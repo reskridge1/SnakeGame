@@ -98,7 +98,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		g.setColor(Color.RED);
 		g.setFont(new Font("Times New Roman", Font.BOLD, 35)); //75-pt bold TNR font
 		FontMetrics metrics = getFontMetrics(g.getFont()); //object for lining up text
-		g.drawString("Score: " +applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: "+applesEaten))/2, g.getFont().getSize()); //sets 'Game Over' in the center of screen
+		g.drawString("Score: " +applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: "+applesEaten))/2, g.getFont().getSize()); //sets 'Score: ' in the top of screen
 	
 		}
 		else {
@@ -172,11 +172,17 @@ public class GamePanel extends JPanel implements ActionListener {
 	 * @param g
 	 */
 	public void GameOver(Graphics g) {
+		//draws the score on screen
+		g.setColor(Color.RED);
+		g.setFont(new Font("Times New Roman", Font.BOLD, 35)); //75-pt bold TNR font
+		FontMetrics scoreMetrics = getFontMetrics(g.getFont()); //object for lining up text
+		g.drawString("Score: " +applesEaten, (SCREEN_WIDTH - scoreMetrics.stringWidth("Score: "+applesEaten))/2, g.getFont().getSize()); //sets 'Score: ' in the top of screen
+		
 		//Game over text
 		g.setColor(Color.RED);
 		g.setFont(new Font("Times New Roman", Font.BOLD, 75)); //75-pt bold TNR font
-		FontMetrics metrics = getFontMetrics(g.getFont()); //object for lining up text
-		g.drawString("Game Over", (SCREEN_WIDTH - metrics.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2); //sets 'Game Over' in the center of screen
+		FontMetrics gameOverMetrics = getFontMetrics(g.getFont()); //object for lining up text
+		g.drawString("Game Over", (SCREEN_WIDTH - gameOverMetrics.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2); //sets 'Game Over' in the center of screen
 	}
 	
 	@Override
