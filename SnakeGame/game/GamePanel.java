@@ -2,6 +2,8 @@ package game;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -74,6 +76,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	 * @param g
 	 */
 	public void draw(Graphics g) {
+		if(running) { //only draw components if game is running
 		for(int i = 0; i < SCREEN_HEIGHT/UNIT_SIZE;i++) { //draws lines on the screen to look like a grid
 			g.drawLine(i*UNIT_SIZE, 0, i*UNIT_SIZE, SCREEN_HEIGHT); //draw lines across x-axis
 			g.drawLine(0, i*UNIT_SIZE, SCREEN_WIDTH, i*UNIT_SIZE); //draw lines across y-axis
@@ -81,7 +84,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		g.setColor(Color.RED);
 		g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE); //randomly creates a red apple of UNIT_SIZE x UNIT_SIZE in one of the grid spaces
 		
-		for(int i = 0; i < bodyParts; i++) {
+		for(int i = 0; i < bodyParts; i++) { //draws snake body parts
 			if(i==0) { //head of snake
 				g.setColor(Color.GREEN);
 				g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE); //UNIT_SIZE x UNIT_SIZE green snake at x-y
@@ -90,6 +93,16 @@ public class GamePanel extends JPanel implements ActionListener {
 				g.setColor(new Color(45,180,0)); //new color different shade of green
 				g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 			}
+		}
+		//draws the score on screen
+		g.setColor(Color.RED);
+		g.setFont(new Font("Times New Roman", Font.BOLD, 35)); //75-pt bold TNR font
+		FontMetrics metrics = getFontMetrics(g.getFont()); //object for lining up text
+		g.drawString("Score: " +applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: "+applesEaten))/2, g.getFont().getSize()); //sets 'Game Over' in the center of screen
+	
+		}
+		else {
+			GameOver(g); //call game over if it isn't running
 		}
 	
 	}
@@ -154,8 +167,16 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 	}
 
+	/**
+	 * what happens in the event that the game isn't running
+	 * @param g
+	 */
 	public void GameOver(Graphics g) {
-		
+		//Game over text
+		g.setColor(Color.RED);
+		g.setFont(new Font("Times New Roman", Font.BOLD, 75)); //75-pt bold TNR font
+		FontMetrics metrics = getFontMetrics(g.getFont()); //object for lining up text
+		g.drawString("Game Over", (SCREEN_WIDTH - metrics.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2); //sets 'Game Over' in the center of screen
 	}
 	
 	@Override
